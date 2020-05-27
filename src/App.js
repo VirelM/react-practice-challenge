@@ -1,6 +1,11 @@
 import React from 'react';
 import './App.css';
-
+import ProfileList from './ProfileList';
+import AddProfile from './AddProfile';
+import {AppContext} from './AppContext';
+import { Route } from 'react-router-dom';
+//import { Link } from 'react-router-dom';
+import Profile from './Profile';
 class App extends React.Component {
 
   constructor(props){
@@ -23,11 +28,25 @@ class App extends React.Component {
     }
   }
   
+  addSetStateProfile = (newprofile, callback) =>{
+    console.log("hello am i working?");
+    console.log(newprofile);
+    console.log({profiles:[...this.state.profiles, newprofile], callback});
+    console.log(this.state.profiles, 'before');
+    this.setState({profiles:[...this.state.profiles, newprofile], callback})
+    console.log(this.state.profiles, 'after');
+  }
+
   render(){
     return (
       <div>
-        {/* Display the full list of Profiles */}
-        {/* Add a form to add a new profile to the list  */}
+        <AppContext.Provider value={{profiles:this.state.profiles, addSetStateProfile:this.addSetStateProfile}}>
+          <Route exact path="/" component={ProfileList}></Route>
+          <Route exact path="/profiles/:profileId" component={Profile}></Route>
+          <Route exact path="/addprofile" component ={AddProfile}></Route>
+          
+          {/* Add a form to add a new profile to the list  */}
+        </AppContext.Provider>
       </div>
     );
   }
