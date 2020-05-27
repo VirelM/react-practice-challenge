@@ -13,7 +13,7 @@ export default class AddProfile extends React.Component{
             firstName:$('#firstName').val(),
             lastName:$('#lastName').val(),
             role:$('#role').val(),
-            // biography:$('#biography').val(),
+            biography:$('#biography').val(),
             id: indexId
         };
         console.log(postProfile);
